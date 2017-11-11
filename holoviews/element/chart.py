@@ -135,21 +135,6 @@ class Bars(Chart):
 
 
 
-class BoxWhisker(Chart):
-    """
-    BoxWhisker represent data as a distributions highlighting
-    the median, mean and various percentiles.
-    """
-
-    group = param.String(default='BoxWhisker', constant=True)
-
-    kdims = param.List(default=[], bounds=(0,None))
-
-    vdims = param.List(default=[Dimension('y')], bounds=(1,1))
-
-    _auto_indexable_1d = False
-
-
 class Histogram(Element2D):
     """
     Histogram contains a number of bins, which are defined by the

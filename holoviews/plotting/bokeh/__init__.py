@@ -13,7 +13,8 @@ from ...element import (Curve, Points, Scatter, Image, Raster, Path,
                         Box, Bounds, Ellipse, Polygons, BoxWhisker, Arrow,
                         ErrorBars, Text, HLine, VLine, Spline, Spikes,
                         Table, ItemTable, Area, HSV, QuadMesh, VectorField,
-                        Graph, Nodes, EdgePaths, Distribution, Bivariate)
+                        Graph, Nodes, EdgePaths, Distribution, Bivariate,
+                        Violin)
 from ...core.options import Options, Cycle, Palette
 from ...core.util import VersionError
 
@@ -32,13 +33,13 @@ from .callbacks import Callback # noqa (API import)
 from .element import OverlayPlot, ElementPlot
 from .chart import (PointPlot, CurvePlot, SpreadPlot, ErrorPlot, HistogramPlot,
                     SideHistogramPlot, BarPlot, SpikesPlot, SideSpikesPlot,
-                    AreaPlot, VectorFieldPlot, BoxWhiskerPlot)
+                    AreaPlot, VectorFieldPlot)
 from .graphs import GraphPlot, NodePlot
 from .path import PathPlot, PolygonPlot, ContourPlot
 from .plot import GridPlot, LayoutPlot, AdjointLayoutPlot
 from .raster import RasterPlot, RGBPlot, HeatMapPlot, HSVPlot, QuadMeshPlot
 from .renderer import BokehRenderer
-from .stats import DistributionPlot, BivariatePlot
+from .stats import DistributionPlot, BivariatePlot, BoxWhiskerPlot, ViolinPlot
 from .tabular import TablePlot
 from .util import bokeh_version
 
@@ -59,7 +60,6 @@ associations = {Overlay: OverlayPlot,
                 # Charts
                 Curve: CurvePlot,
                 Bars: BarPlot,
-                BoxWhisker: BoxWhiskerPlot,
                 Points: PointPlot,
                 Scatter: PointPlot,
                 ErrorBars: ErrorPlot,
@@ -104,7 +104,10 @@ associations = {Overlay: OverlayPlot,
 
                 # Statistics
                 Distribution: DistributionPlot,
-                Bivariate: BivariatePlot}
+                Bivariate: BivariatePlot,
+                BoxWhisker: BoxWhiskerPlot,
+                Violin: ViolinPlot}
+
 
 if DFrame is not None:
     associations[DFrame] = TablePlot
@@ -223,3 +226,6 @@ options.Polygons = Options('style', muted_alpha=0.2)
 # Statistics
 options.Distribution = Options('style', fill_color=Cycle(), line_color='black',
                                fill_alpha=0.5)
+options.Violin = Options('style', violin_fill_color=Cycle(),
+                         violin_line_color='black', violin_fill_alpha=0.5,
+                         stats_color='black')
