@@ -165,7 +165,6 @@ class ViolinPlot(BoxPlot):
         style = {k: v for k, v in style.items()
                  if k not in ['zorder', 'label']}
         style['vert'] = not self.invert_axes
-        format_kdims = [kd(value_format=None) for kd in element.kdims]        
-        return (data,), style, {'dimensions': [format_kdims,
-                                               element.vdims[0]],
-                                'xticks': list(enumerate(labels))}
+        format_kdims = [kd(value_format=None) for kd in element.kdims]
+        ticks = {'yticks' if self.invert_axes else 'xticks': list(enumerate(labels))}
+        return (data,), style, {'dimensions': [format_kdims, element.vdims[0]], **ticks}
