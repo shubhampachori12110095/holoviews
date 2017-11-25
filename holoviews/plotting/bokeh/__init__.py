@@ -15,7 +15,6 @@ from ...element import (Curve, Points, Scatter, Image, Raster, Path,
                         Table, ItemTable, Area, HSV, QuadMesh, VectorField,
                         Graph, Nodes, EdgePaths, Distribution, Bivariate,
                         TriMesh, Chord)
->>>>>>> Implemented Chord element and plots
 from ...core.options import Options, Cycle, Palette
 from ...core.util import VersionError
 
