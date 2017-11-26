@@ -14,7 +14,7 @@ from ...element import (Curve, Points, Scatter, Image, Raster, Path,
                         ErrorBars, Text, HLine, VLine, Spline, Spikes,
                         Table, ItemTable, Area, HSV, QuadMesh, VectorField,
                         Graph, Nodes, EdgePaths, Distribution, Bivariate,
-                        TriMesh)
+                        TriMesh, RadialHeatMap)
 from ...core.options import Options, Cycle, Palette
 from ...core.util import VersionError
 
@@ -37,7 +37,8 @@ from .chart import (PointPlot, CurvePlot, SpreadPlot, ErrorPlot, HistogramPlot,
 from .graphs import GraphPlot, NodePlot, TriMeshPlot
 from .path import PathPlot, PolygonPlot, ContourPlot
 from .plot import GridPlot, LayoutPlot, AdjointLayoutPlot
-from .raster import RasterPlot, RGBPlot, HeatMapPlot, HSVPlot, QuadMeshPlot
+from .raster import RasterPlot, RGBPlot, HeatMapPlot, RadialHeatMapPlot,\
+    HSVPlot, QuadMeshPlot
 from .renderer import BokehRenderer
 from .stats import DistributionPlot, BivariatePlot
 from .tabular import TablePlot
@@ -76,6 +77,7 @@ associations = {Overlay: OverlayPlot,
                 HSV: HSVPlot,
                 Raster: RasterPlot,
                 HeatMap: HeatMapPlot,
+                RadialHeatMap: RadialHeatMapPlot,
                 QuadMesh: QuadMeshPlot,
 
                 # Paths
@@ -181,6 +183,11 @@ options.GridImage = Options('style', cmap=dflt_cmap)
 options.Raster = Options('style', cmap=dflt_cmap)
 options.QuadMesh = Options('style', cmap=dflt_cmap, line_alpha=0)
 options.HeatMap = Options('style', cmap='RdYlBu_r', line_alpha=0)
+options.RadialHeatMap = Options('style', cmap='viridis',
+                                separator_line_color="#FFFFFF",
+                                separator_line_width=3,
+                                annular_line_color="#FFFFFF")
+options.RadialHeatMap = Options('plot', xaxis=None, yaxis=None, show_frame=False)
 
 # Annotations
 options.HLine = Options('style', color=Cycle(), line_width=3, alpha=1)
