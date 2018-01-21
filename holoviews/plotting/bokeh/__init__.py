@@ -14,7 +14,7 @@ from ...element import (Curve, Points, Scatter, Image, Raster, Path,
                         ErrorBars, Text, HLine, VLine, Spline, Spikes,
                         Table, ItemTable, Area, HSV, QuadMesh, VectorField,
                         Graph, Nodes, EdgePaths, Distribution, Bivariate,
-                        TriMesh, RadialHeatMap)
+                        TriMesh)
 from ...core.options import Options, Cycle, Palette
 from ...core.util import VersionError
 
@@ -28,6 +28,7 @@ try:
 except:
     DFrame = None
 
+from ..plot import PlotSelector
 from .annotation import TextPlot, LineAnnotationPlot, SplinePlot, ArrowPlot
 from .callbacks import Callback # noqa (API import)
 from .element import OverlayPlot, ElementPlot
@@ -76,8 +77,10 @@ associations = {Overlay: OverlayPlot,
                 RGB: RGBPlot,
                 HSV: HSVPlot,
                 Raster: RasterPlot,
-                HeatMap: HeatMapPlot,
-                RadialHeatMap: RadialHeatMapPlot,
+                HeatMap: PlotSelector(HeatMapPlot.is_radial,
+                                      {True: RadialHeatMapPlot,
+                                       False: HeatMapPlot},
+                                      True),
                 QuadMesh: QuadMeshPlot,
 
                 # Paths
@@ -182,16 +185,10 @@ options.Image = Options('style', cmap=dflt_cmap)
 options.GridImage = Options('style', cmap=dflt_cmap)
 options.Raster = Options('style', cmap=dflt_cmap)
 options.QuadMesh = Options('style', cmap=dflt_cmap, line_alpha=0)
-options.HeatMap = Options('style', cmap='RdYlBu_r', line_alpha=0)
-options.RadialHeatMap = Options('style', cmap='RdBu_r',
-                                xmarks_line_color="#FFFFFF",
-                                xmarks_line_width=3,
-                                ymarks_line_color="#FFFFFF",
-                                ymarks_line_width=3,
-                                annular_line_color=None)
-options.RadialHeatMap = Options('plot', xaxis=None, yaxis=None,
-                                show_frame=False,
-                                clipping_colors={"NaN": "#FFFFFF"})
+options.HeatMap = Options('style', cmap='RdYlBu_r',
+                          xmarks_line_color="#FFFFFF", xmarks_line_width=3,
+                          ymarks_line_color="#FFFFFF", ymarks_line_width=3,
+                          annular_line_color=None)
 
 # Annotations
 options.HLine = Options('style', color=Cycle(), line_width=3, alpha=1)
