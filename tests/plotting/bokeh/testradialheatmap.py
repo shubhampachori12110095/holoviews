@@ -7,6 +7,7 @@ from itertools import product
 from holoviews.core.options import Store
 from holoviews.element.raster import HeatMap
 from holoviews.element.comparison import ComparisonTestCase
+from holoviews.plotting.comms import Comm
 
 try:
     from holoviews.plotting.bokeh.util import bokeh_version
@@ -17,13 +18,15 @@ except:
     bokeh_renderer = None
 
 
-class BokehGraphPlotTests(ComparisonTestCase):
+class RadialHeatMapPlotTests(ComparisonTestCase):
+
     def setUp(self):
         if not bokeh_renderer:
             raise SkipTest("Bokeh required to test plot instantiation")
         self.previous_backend = Store.current_backend
         Store.current_backend = 'bokeh'
         self.default_comm = bokeh_renderer.comms['default']
+        bokeh_renderer.comms['default'] = (Comm, '')
 
         # set up dummy data for convenient tests
         x = ["Seg {}".format(idx) for idx in range(2)]
